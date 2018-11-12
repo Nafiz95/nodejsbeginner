@@ -5,6 +5,10 @@ var server=http.Server(app);
 app.get('/',function(req,res){
   res.sendFile(__dirname+'/index.html');
 });
+
+app.get('/About',function(req,res){
+  res.sendFile(__dirname+'/About.html');
+});
 server.listen(process.env.PORT || 3000, process.env.IP|| 'localhost', function(){
      console.log('Server running');
  });
