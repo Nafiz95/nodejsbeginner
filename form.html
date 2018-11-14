@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NOOB FORM</title>
+</head>
+<body>
+    <div align="center">
+    <form>
+        <h1> NEW ARTICLE </h1>
+        <input type="text" name="" placeholder="TITLE" id ="title"/>
+        <br>
+        <br>
+        <textarea type="textarea" id="content" placeholder="CONTENT"></textarea>
+        <br>
+        <br>
+        <button id="submit">SUBMIT</button>
+        <br>
+        <br>
+        <button id="getArticle">GET ARTICLE</button>
+    </form>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var article = {title:"",content:""}
+        $('#submit').click(function (event) {
+            article.title=$('#title').val();
+            article.content=$('#content').val();
+            $.ajax(
+                {
+                    method: "POST",
+                    url:"/article/create",
+                    data: article
+                }).done(function(res) {
+                    console.log(res);                
+                }).fail(function(res)
+                {
+                    console.log(res);
+                });
+                
+        });
+        $('#getArticle').click(function (event) {
+        $.ajax(
+            {
+                method: "GET",
+                url:"/article/list",
+            }).done(function(res) {
+                console.log(res);                
+            }).fail(function(res)
+            {
+                console.log(res);
+            });
+                
+        });
+        
+    </script>
+</body>
+</html>

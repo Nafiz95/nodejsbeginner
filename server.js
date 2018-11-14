@@ -2,6 +2,11 @@ var http = require('http');
 var express= require('express');
 var app= express();
 var server=http.Server(app);
+var bodyParser=require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+
 app.get('/',function(req,res){
   res.sendFile(__dirname+'/index.html');
 });
@@ -9,6 +14,32 @@ app.get('/',function(req,res){
 app.get('/About',function(req,res){
   res.sendFile(__dirname+'/About.html');
 });
+
+app.get('/form',function(req,res){
+  res.sendFile(__dirname+'/form.html');
+});
+
+var article= [];
+app.post('/article/create',function(req,res)
+{
+    console.log(req.body);
+    if(!req.body.title)
+    {
+        return res.status(400).json({error:"ADD A TITLE NOOB"});
+    }
+    
+    else if(!req.body.content)
+    {
+        return res.status(400).json({error:"ADD CONTENT NOOB"});
+    }
+    article.push(req.body);
+    return res.status('200').json({message:"TA_DA"});
+});
+
+app.get('/article/list',function(req, res) {
+    return res.status(200).json({articles: article});
+})
+
 server.listen(process.env.PORT || 3000, process.env.IP|| 'localhost', function(){
      console.log('Server running');
  });
