@@ -40,6 +40,14 @@ app.get('/article/list',function(req, res) {
     return res.status(200).json({articles: article});
 })
 
+  article.push({title: "Test Article 1", content:"Content 1"});
+  article.push({title: "Test Article 2", content:"Content 2"});
+  app.get('/article/:articleID', function(request, response) {
+      response.render('../article.ejs',{
+        article: article[request.params.articleID]
+      })
+  });
+
 server.listen(process.env.PORT || 3000, process.env.IP|| 'localhost', function(){
      console.log('Server running');
  });
