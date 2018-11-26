@@ -1,3 +1,4 @@
+
 var http = require('http');
 var express = require('express');
 var app = express();
@@ -28,6 +29,7 @@ app.get('/about', function(request,response){
 });
 
 require('./routes/article-routes.js')(app);
+
 server.listen(process.env.PORT, process.env.IP, function(){
   console.log('Server running');
 });

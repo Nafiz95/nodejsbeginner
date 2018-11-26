@@ -10,7 +10,7 @@ var articleSchema = new Schema({
   },
   reading_time:{
     type: Number,
-    required: "Reading Time Required"
+    required: "Reading time required"
   }
 });
 
